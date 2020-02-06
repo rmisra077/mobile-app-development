@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/background">
 
     <TextView
         android:id="@+id/textBox"
@@ -20,13 +21,10 @@
         android:id="@+id/responseEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint=""
+        android:hint="Type something to print to logcat"
         app:layout_constraintTop_toBottomOf="@+id/textBox"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/clickButton"
         android:layout_width="wrap_content"
@@ -35,6 +33,17 @@
         android:textColor="#318214"
         android:textAllCaps="true"
         app:layout_constraintTop_toBottomOf="@+id/responseEditText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <Button
+        android:id="@+id/colorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_page_color"
+        android:textColor="#318214"
+        android:textAllCaps="true"
+        app:layout_constraintTop_toBottomOf="@+id/clickButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
