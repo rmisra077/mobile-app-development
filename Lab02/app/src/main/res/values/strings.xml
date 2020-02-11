@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Lab 02</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="update_name">Update name</string>
+    <string-array
+        name="fruits">
+        <item>apple</item>
+        <item>banana</item>
+        <item>pear</item>
+        <item>grapes</item>
+        <item>orange</item>
+    </string-array>
 </resources>
