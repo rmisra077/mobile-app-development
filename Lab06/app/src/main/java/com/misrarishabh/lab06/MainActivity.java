@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 class Counter {
@@ -103,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
 
         String tempstring = "onCreate(): " + counter.getCreate() + " current / " + numcalls + " overall";
         oncreate.setText(tempstring);
+
+        onstop.setText("onPause(): " + counter.getPause() + " current / " + sharedPreferences.getInt("pause", 0) + " overall");
+        onstop.setText("onStop(): " + counter.getStop() + " current / " + sharedPreferences.getInt("stop", 0) + " overall");
+        onrestart.setText("onRestart(): " + counter.getRestart() + " current / " + sharedPreferences.getInt("restart", 0) + " overall");
+        ondestroy.setText("onDestroy(): " + counter.getDestroy() + " current / " + sharedPreferences.getInt("destroy", 0) + " overall");
     }
     protected void onStart() {
         super.onStart();
@@ -161,13 +167,17 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onDestroy() {
         super.onDestroy();
+        Log.i("info", "INSIDE ONDESTROY");
         counter.setDestroy(counter.getDestroy() + 1);
         int numcalls = sharedPreferences.getInt("destroy", 0);
+        Log.i("info", "pre num calls: " + numcalls);
         numcalls +=1;
         editor.putInt("destroy", numcalls);
         editor.apply();
 
         String tempstring = "onDestroy(): " + counter.getDestroy() + " current / " + numcalls + " overall";
+        ondestroy = findViewById(R.id.ondestroy);
         ondestroy.setText(tempstring);
+        Log.i("info", tempstring);
     }
 }
