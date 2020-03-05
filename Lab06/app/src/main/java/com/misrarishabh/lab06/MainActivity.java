@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 
 class Counter {
     // Variable instantiations
@@ -70,10 +71,27 @@ public class MainActivity extends AppCompatActivity {
     Counter counter;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    TextView oncreate;
+    TextView onstart;
+    TextView onresume;
+    TextView onpause;
+    TextView onstop;
+    TextView onrestart;
+    TextView ondestroy;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        oncreate = findViewById(R.id.oncreate);
+        onstart = findViewById(R.id.onstart);
+        onresume = findViewById(R.id.onresume);
+        onpause = findViewById(R.id.onpause);
+        onstop = findViewById(R.id.onstop);
+        onrestart = findViewById(R.id.onrestart);
+        ondestroy = findViewById(R.id.ondestroy);
+
         sharedPreferences = getSharedPreferences("NumCalls", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         counter = new Counter();
@@ -82,6 +100,9 @@ public class MainActivity extends AppCompatActivity {
         numcalls +=1;
         editor.putInt("create", numcalls);
         editor.apply();
+
+        String tempstring = "onCreate(): " + counter.getCreate() + " current / " + numcalls + " overall";
+        oncreate.setText(tempstring);
     }
     protected void onStart() {
         super.onStart();
@@ -90,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
         numcalls +=1;
         editor.putInt("start", numcalls);
         editor.apply();
+
+        String tempstring = "onStart(): " + counter.getStart() + " current / " + numcalls + " overall";
+        onstart.setText(tempstring);
     }
     protected void onResume() {
         super.onResume();
@@ -98,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
         numcalls +=1;
         editor.putInt("resume", numcalls);
         editor.apply();
+
+        String tempstring = "onResume(): " + counter.getResume() + " current / " + numcalls + " overall";
+        onresume.setText(tempstring);
     }
     protected void onPause() {
         super.onPause();
@@ -106,6 +133,9 @@ public class MainActivity extends AppCompatActivity {
         numcalls +=1;
         editor.putInt("pause", numcalls);
         editor.apply();
+
+        String tempstring = "onPause(): " + counter.getPause() + " current / " + numcalls + " overall";
+        onpause.setText(tempstring);
     }
     protected void onStop() {
         super.onStop();
@@ -114,6 +144,9 @@ public class MainActivity extends AppCompatActivity {
         numcalls +=1;
         editor.putInt("stop", numcalls);
         editor.apply();
+
+        String tempstring = "onStop(): " + counter.getStop() + " current / " + numcalls + " overall";
+        onstop.setText(tempstring);
     }
     protected void onRestart() {
         super.onRestart();
@@ -122,6 +155,9 @@ public class MainActivity extends AppCompatActivity {
         numcalls +=1;
         editor.putInt("restart", numcalls);
         editor.apply();
+
+        String tempstring = "onRestart(): " + counter.getRestart() + " current / " + numcalls + " overall";
+        onrestart.setText(tempstring);
     }
     protected void onDestroy() {
         super.onDestroy();
@@ -130,5 +166,8 @@ public class MainActivity extends AppCompatActivity {
         numcalls +=1;
         editor.putInt("destroy", numcalls);
         editor.apply();
+
+        String tempstring = "onDestroy(): " + counter.getDestroy() + " current / " + numcalls + " overall";
+        ondestroy.setText(tempstring);
     }
 }
