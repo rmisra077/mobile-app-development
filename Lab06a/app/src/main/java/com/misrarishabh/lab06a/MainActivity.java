@@ -3,12 +3,33 @@ package com.misrarishabh.lab06a;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    EditText input;
+    TextView output;
+    Button translatebutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        input = findViewById(R.id.wordenter);
+        output = findViewById(R.id.translated);
+        translatebutton = findViewById(R.id.button);
+
+        translatebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tochange = input.getText().toString();
+                String newword = translateWord(tochange);
+                output.setText(newword);
+            }
+        });
+
     }
     public static String translateWord(String word) {
         String lowerCaseWord = word.toLowerCase();
