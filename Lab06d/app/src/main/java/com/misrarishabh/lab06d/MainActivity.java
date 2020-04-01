@@ -1,5 +1,4 @@
-package com.misrarishabh.lab06c;
-
+package com.misrarishabh.lab06d;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
@@ -9,12 +8,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import com.google.gson.Gson;
+
+class WordDayObjects {
+    ArrayList<String> words;
+    Calendar c;
+    public WordDayObjects() {
+        words = new ArrayList<String>();
+        c = Calendar.getInstance();
+    }
+}
 
 public class MainActivity extends AppCompatActivity {
     EditText input;
     TextView output, totalcalls;
     Button translatebutton;
-
+    Gson gson;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     @Override
