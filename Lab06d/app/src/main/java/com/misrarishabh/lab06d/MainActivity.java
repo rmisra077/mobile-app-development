@@ -10,15 +10,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import com.google.gson.Gson;
 
-class WordDayObjects {
-    ArrayList<String> words;
-    Calendar c;
-    public WordDayObjects() {
-        words = new ArrayList<String>();
-        c = Calendar.getInstance();
+
+class WordTimeObject {
+    ArrayList<String> dates;
+    public WordTimeObject() {
+        dates = new ArrayList<String>();
+    }
+    public void addDate(String date) {
+        dates.add(date);
     }
 }
 
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         translatebutton = findViewById(R.id.button);
         totalcalls = findViewById(R.id.totalcalls);
 
+        gson = new Gson();
+
         sharedPreferences = getSharedPreferences("numtranslate", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
@@ -52,7 +55,26 @@ public class MainActivity extends AppCompatActivity {
                 numtranslates +=1;
                 editor.putInt("translates", numtranslates);
                 editor.apply();
-                totalcalls.setText("Total Translates: " + numtranslates);
+                totalcalls.setText("Total Overall Translates: " + numtranslates);
+
+                String wordTimeAdder = sharedPreferences.getString(tochange, "");
+                Calendar c = Calendar.getInstance();
+                String currdatetime = c.getTime().toString();
+
+                if(wordTimeAdder.equals("")) { //Not stored in shared preferences yet
+                    WordTimeObject wto = new WordTimeObject();
+                    wto.addDate(currdatetime);
+                    String jsonwto = gson.toJson(wto);
+                    editor.putString(tochange, jsonwto);
+                    editor.apply();
+                }
+                else { //Already present in shared preferences
+                    WordTimeObject existentWto = gson.fromJson(wordTimeAdder, WordTimeObject.class);
+                    existentWto.addDate(currdatetime);
+                    String jsonewto = gson.toJson(existentWto);
+                    editor.putString(tochange, jsonewto);
+                    editor.apply();
+                }
             }
         });
 
